@@ -1,19 +1,47 @@
 
 import java.util.*;
-
 import edu.duke.*;
 
 public class EarthQuakeClient {
-    String source = "src\\data\\nov20quakedatasmall.atom";
-    //String source = "src\\data\\nov20quakedata.atom";
+    //String source = "src\\data\\nov20quakedatasmall.atom";
+    String source = "src\\data\\nov20quakedata.atom";
     //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
 
-    public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData, double magMin) {
+    public ArrayList<QuakeEntry> filterByDepth(ArrayList<QuakeEntry> quakeData, double minDepth,  double maxDepth) {
         ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
         for (QuakeEntry qe : quakeData) {
-            if (qe.getMagnitude() > magMin) {
+            if (qe.getDepth() > minDepth && qe.getDepth() < maxDepth) {
                 answer.add(qe);
             }
+        }
+        return answer;
+    }
+
+    public ArrayList<QuakeEntry> filterByMagnitude(ArrayList<QuakeEntry> quakeData, double minMag) {
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for (QuakeEntry qe : quakeData) {
+            if (qe.getMagnitude() > minMag) {
+                answer.add(qe);
+            }
+        }
+        return answer;
+    }
+
+
+    public ArrayList<QuakeEntry> filterByPhrase(ArrayList<QuakeEntry> quakeData, String where, String phrase) {
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for (QuakeEntry qe : quakeData) {
+            switch (where) {
+                case "start": if (qe.getInfo().startsWith(phrase)) answer.add(qe);
+                    break;
+                case "end":  if (qe.getInfo().endsWith(phrase)) answer.add(qe);
+                    break;
+                case "any":  if (qe.getInfo().contains(phrase)) answer.add(qe);
+                    break;
+                default:     if (qe.getInfo().contains(phrase)) answer.add(qe);
+                    break;
+            }
+
         }
         return answer;
     }
@@ -51,6 +79,28 @@ public class EarthQuakeClient {
         System.out.println("Found " + listBig.size() + " quakes that match that criteria");
     }
 
+    public void quakesOfDepth() {
+        EarthQuakeParser parser = new EarthQuakeParser();
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("read data for " + list.size() + " quakes");
+        ArrayList<QuakeEntry> listDeep = filterByDepth(list, -8000.0, -5000.0);
+        for (QuakeEntry qe : listDeep) {
+            System.out.println(qe);
+        }
+        System.out.println("Found " + listDeep.size() + " quakes that match that criteria");
+    }
+
+    public void quakesByPhrase() {
+        EarthQuakeParser parser = new EarthQuakeParser();
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("read data for " + list.size() + " quakes");
+        ArrayList<QuakeEntry> listDeep = filterByPhrase(list, "any", "Creek");
+        for (QuakeEntry qe : listDeep) {
+            System.out.println(qe);
+        }
+        System.out.println("Found " + listDeep.size() + " quakes that match that criteria");
+    }
+
     public void createCSV() {
         EarthQuakeParser parser = new EarthQuakeParser();
         ArrayList<QuakeEntry> list = parser.read(source);
@@ -83,7 +133,7 @@ public class EarthQuakeClient {
         //client.bigQuakes();
         //client.closeToMe();
         //client.quakesOfDepth();
-        //client.quakesByPhrase();
+        client.quakesByPhrase();
         //Filtered by magnitude
         //ArrayList<QuakeEntry> filtered = client.filterByMagnitude(quakeData, 5.0);
         //client.dumpCSV(filtered);
