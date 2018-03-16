@@ -1,14 +1,14 @@
-public class DistanceFilter {
+public class DistanceFilter implements Filter {
     private Location location;
-    private double distance;
+    private double maxDistance;
 
     DistanceFilter(Location loc, double dist) {
         location = loc;
-        distance = dist;
+        maxDistance = dist;
     }
 
     public boolean satisfies(QuakeEntry qe) {
-        return qe.getLocation().distanceTo(location) < distance;
+        return qe.getLocation().distanceTo(location) < maxDistance;
     }
 
 }
