@@ -8,6 +8,10 @@ public class MagnitudeFilter implements Filter {
         maxMag = max;
     }
 
+    public String getName() {
+        return "MagnitudeFilter";
+    }
+
     public boolean satisfies(QuakeEntry qe) {
         return qe.getMagnitude() >= minMag && qe.getMagnitude() <= maxMag;
     }

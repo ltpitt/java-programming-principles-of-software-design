@@ -7,6 +7,10 @@ public class PhraseFilter implements Filter {
         phrase = phr;
     }
 
+    public String getName() {
+        return "PhraseFilter";
+    }
+
     public boolean satisfies(QuakeEntry qe) {
 
         switch (where) {

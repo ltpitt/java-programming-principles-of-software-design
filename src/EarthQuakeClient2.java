@@ -47,8 +47,52 @@ public class EarthQuakeClient2 {
 
     }
 
-    public void testMatchAllFilter2() {
+    public void testMatchAllFilter() {
+        EarthQuakeParser parser = new EarthQuakeParser();
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("# quakes read: " + list.size());
+        MatchAllFilter maf = new MatchAllFilter();
+        Filter mf = new MagnitudeFilter(0.0, 2.0);
+        Filter df = new DepthFilter(-100000.0, -10000.0);
+        Filter pf = new PhraseFilter("starts","a");
+        maf.addFilter(mf);
+        maf.addFilter(df);
+        maf.addFilter(pf);
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for (QuakeEntry qe : list) {
+            if (maf.satisfies(qe)) {
+                answer.add(qe);
+            }
+        }
+        for (QuakeEntry qe : answer) {
+            System.out.println(qe);
+        }
+        System.out.println("Found " + list.size() + " quakes that match that criteria");
+    }
 
+
+    public void testMatchAllFilter2() {
+        EarthQuakeParser parser = new EarthQuakeParser();
+        ArrayList<QuakeEntry> list = parser.read(source);
+        System.out.println("# quakes read: " + list.size());
+        Location tulsa = new Location(36.1314, -95.9372);
+        MatchAllFilter maf = new MatchAllFilter();
+        Filter mf = new MagnitudeFilter(0.0, 3.0);
+        Filter df = new DistanceFilter(tulsa, 10000000);
+        Filter pf = new PhraseFilter("starts","Ca");
+        maf.addFilter(mf);
+        maf.addFilter(df);
+        maf.addFilter(pf);
+        ArrayList<QuakeEntry> answer = new ArrayList<QuakeEntry>();
+        for (QuakeEntry qe : list) {
+            if (maf.satisfies(qe)) {
+                answer.add(qe);
+            }
+        }
+        for (QuakeEntry qe : answer) {
+            System.out.println(qe);
+        }
+        System.out.println("Found " + list.size() + " quakes that match that criteria");
     }
 
     public void createCSV() {
@@ -73,7 +117,7 @@ public class EarthQuakeClient2 {
         System.out.println("Working Directory = " +
                 System.getProperty("user.dir"));
         EarthQuakeClient2 client = new EarthQuakeClient2();
-        client.quakesWithFilter();
+        client.testMatchAllFilter2();
     }
 
 }
