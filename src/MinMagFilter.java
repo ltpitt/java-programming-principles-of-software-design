@@ -11,7 +11,11 @@ public class MinMagFilter implements Filter
     
     public MinMagFilter(double min) { 
         magMin = min;
-    } 
+    }
+
+    public String getName() {
+        return "MinMagFilter";
+    }
 
     public boolean satisfies(QuakeEntry qe) { 
         return qe.getMagnitude() >= magMin; 
