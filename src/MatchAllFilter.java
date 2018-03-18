@@ -8,6 +8,14 @@ public class MatchAllFilter implements Filter {
 
     }
 
+    public String getName() {
+        String usedFilters = "";
+        for (Filter filter : filters) {
+            usedFilters += filter.getName() + " ";
+        }
+        return usedFilters;
+    }
+
     public void addFilter(Filter filter) {
         filters.add(filter);
     }
