@@ -83,7 +83,7 @@ public class EarthQuakeClient {
         EarthQuakeParser parser = new EarthQuakeParser();
         ArrayList<QuakeEntry> list = parser.read(source);
         System.out.println("read data for " + list.size() + " quakes");
-        ArrayList<QuakeEntry> listDeep = filterByDepth(list, -8000.0, -5000.0);
+        ArrayList<QuakeEntry> listDeep = filterByDepth(list, -4000.0, -2000.0);
         for (QuakeEntry qe : listDeep) {
             System.out.println(qe);
         }
@@ -94,7 +94,7 @@ public class EarthQuakeClient {
         EarthQuakeParser parser = new EarthQuakeParser();
         ArrayList<QuakeEntry> list = parser.read(source);
         System.out.println("read data for " + list.size() + " quakes");
-        ArrayList<QuakeEntry> listDeep = filterByPhrase(list, "any", "Creek");
+        ArrayList<QuakeEntry> listDeep = filterByPhrase(list, "any", "Can");
         for (QuakeEntry qe : listDeep) {
             System.out.println(qe);
         }
