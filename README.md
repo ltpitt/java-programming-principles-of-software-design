@@ -12,6 +12,9 @@
 
 ## Release History
 
+* 0.0.2
+    * Filtering classes and methods are implementes
+
 * 0.0.1
     * First commit
 
