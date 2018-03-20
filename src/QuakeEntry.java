@@ -22,9 +22,11 @@ public class QuakeEntry implements Comparable<QuakeEntry>{
 	public double getMagnitude(){
 		return magnitude;
 	}
+	
 	public String getInfo(){
 		return title;
 	}
+	
 	public double getDepth(){
 		return depth;
 	}
@@ -40,7 +42,6 @@ public class QuakeEntry implements Comparable<QuakeEntry>{
 		}
 		if (difflat < 0) return -1;
 		if (difflat > 0) return 1;
-		
 		
 		// never reached
 		return 0;

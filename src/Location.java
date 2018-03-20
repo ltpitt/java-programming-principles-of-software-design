@@ -26,7 +26,6 @@
  * outside of Android. Also added constructor with Latitude and Longitude.
  */
 
-
 import java.text.DecimalFormat;
 import java.util.StringTokenizer;
 
@@ -41,6 +40,7 @@ import java.util.StringTokenizer;
  * (both UTC time and elapsed real-time since boot), all other
  * parameters are optional.
  */
+
 public class Location  {
     /**
      * Constant used to specify formatting of a latitude or longitude
