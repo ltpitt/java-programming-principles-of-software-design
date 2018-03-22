@@ -11,15 +11,42 @@ import edu.duke.*;
 
 public class QuakeSortInPlace {
 
-    //String source = "src\\data\\nov20quakedatatiny.atom";
-    String source = "src\\data\\nov20quakedatasmall.atom";
+    String source = "src\\data\\earthquakeDataSampleSix2.atom";
+    //String source = "src\\data\\nov20quakedatasmall.atom";
     //String source = "src\\data\\nov20quakedata.atom";
     //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
 
     public QuakeSortInPlace() {
     }
 
-    public void onePassBubbleSort (ArrayList<QuakeEntry> quakeData, int numSorted) {
+    public void sortByMagnitudeWithBubbleSortWithCheck(ArrayList<QuakeEntry> in){
+        int passCount = 0;
+        for (int i = 0; i < in.size() -1; i++) {
+            if (!checkInSortedOrder(in)) {
+                onePassBubbleSort(in, i);
+                passCount++;
+            }   else {
+                break;
+            }
+        }
+        System.out.println("Total bubble sort pass number is " + passCount);
+    }
+
+    public boolean checkInSortedOrder(ArrayList<QuakeEntry> quakes) {
+        boolean result = true;
+        for (int i = 0; i < quakes.size(); i++) {
+            double currentQuakeMagnitude = quakes.get(i).getMagnitude();
+            if (i+1 < quakes.size()) {
+                double nextQuakeMagnitude = quakes.get(i + 1).getMagnitude();
+                if (nextQuakeMagnitude < currentQuakeMagnitude) {
+                    result = false;
+                }
+            }
+        }
+        return result;
+    }
+
+    public void onePassBubbleSort(ArrayList<QuakeEntry> quakeData, int numSorted) {
         for (int i = 0; i < quakeData.size() - numSorted; i++) {
             int currentIdx = i;
             int nextIdx = i + 1;
@@ -31,15 +58,15 @@ public class QuakeSortInPlace {
                 }
             }
         }
-        for (QuakeEntry qe : quakeData) {
-            System.out.println(qe);
-        }
     }
 
     public void sortByMagnitudeWithBubbleSort(ArrayList<QuakeEntry> in) {
+        int passCount = 0;
         for (int i = 0; i < in.size() -1; i++) {
             onePassBubbleSort(in, i);
+            passCount++;
         }
+        System.out.println("Total bubble sort pass number is " + passCount);
     }
 
     public int getSmallestMagnitude(ArrayList<QuakeEntry> quakes, int from) {
@@ -64,7 +91,7 @@ public class QuakeSortInPlace {
         
     }
 
-    public int getLargestDepth (ArrayList<QuakeEntry> quakes, int from) {
+    public int getLargestDepth(ArrayList<QuakeEntry> quakes, int from) {
         int maxIdx = from;
         for (int i=from+1; i< quakes.size(); i++) {
             if (quakes.get(i).getDepth() > quakes.get(maxIdx).getDepth()) {
@@ -74,7 +101,7 @@ public class QuakeSortInPlace {
         return maxIdx;
     }
 
-    public void sortByLargestDepth  (ArrayList<QuakeEntry> in) {
+    public void sortByLargestDepth(ArrayList<QuakeEntry> in) {
 
         for (int i=0; i< in.size(); i++) {
             int maxIdx = getLargestDepth(in,i);
@@ -131,6 +158,11 @@ public class QuakeSortInPlace {
         */
         //quakeSortInPlace.onePassBubbleSort(list, 0);
         quakeSortInPlace.sortByMagnitudeWithBubbleSort(list);
+        //quakeSortInPlace.sortByMagnitudeWithBubbleSortWithCheck(list);
+        for (QuakeEntry qe : list) {
+            System.out.println(qe);
+        }
+        //System.out.println("List is sorted is " + quakeSortInPlace.checkInSortedOrder(list));
     }
 
 }
