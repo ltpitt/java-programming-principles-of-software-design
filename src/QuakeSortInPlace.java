@@ -11,12 +11,27 @@ import edu.duke.*;
 
 public class QuakeSortInPlace {
 
-    String source = "src\\data\\earthquakeDataSampleSix2.atom";
+    String source = "src\\data\\earthQuakeDataDec6sample1.atom";
     //String source = "src\\data\\nov20quakedatasmall.atom";
     //String source = "src\\data\\nov20quakedata.atom";
     //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
 
     public QuakeSortInPlace() {
+    }
+
+    public void sortByMagnitudeWithCheck(ArrayList<QuakeEntry> in) {
+        int passCount = 0;
+        for (int i=0; i< in.size(); i++) {
+            if (!checkInSortedOrder(in)) {
+                passCount++;
+                int minIdx = getSmallestMagnitude(in, i);
+                QuakeEntry qi = in.get(i);
+                QuakeEntry qmin = in.get(minIdx);
+                in.set(i, qmin);
+                in.set(minIdx, qi);
+            }
+        }
+        System.out.println("Total bubble sort pass number is " + passCount);
     }
 
     public void sortByMagnitudeWithBubbleSortWithCheck(ArrayList<QuakeEntry> in){
@@ -102,15 +117,19 @@ public class QuakeSortInPlace {
     }
 
     public void sortByLargestDepth(ArrayList<QuakeEntry> in) {
-
+        int passCount = 0;
         for (int i=0; i< in.size(); i++) {
+            if (passCount == 70) {
+                break;
+            }
             int maxIdx = getLargestDepth(in,i);
             QuakeEntry currentQuake = in.get(i);
             QuakeEntry largestDepthQuake = in.get(maxIdx);
             in.set(i,largestDepthQuake);
             in.set(maxIdx,currentQuake);
+            passCount++;
         }
-
+        System.out.println("Total sort pass number is " + passCount);
     }
 
     public void createCSV() {
@@ -157,8 +176,10 @@ public class QuakeSortInPlace {
         }
         */
         //quakeSortInPlace.onePassBubbleSort(list, 0);
-        quakeSortInPlace.sortByMagnitudeWithBubbleSort(list);
+        //quakeSortInPlace.sortByMagnitudeWithBubbleSort(list);
         //quakeSortInPlace.sortByMagnitudeWithBubbleSortWithCheck(list);
+        //quakeSortInPlace.sortByMagnitudeWithCheck(list);
+        //quakeSortInPlace.sortByLargestDepth(list);
         for (QuakeEntry qe : list) {
             System.out.println(qe);
         }
