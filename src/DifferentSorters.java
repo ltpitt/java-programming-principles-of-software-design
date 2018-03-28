@@ -12,7 +12,8 @@ public class DifferentSorters {
 
 
     //String source = "src\\data\\nov20quakedatasmall.atom";
-    String source = "src\\data\\nov20quakedata.atom";
+    //String source = "src\\data\\nov20quakedata.atom";
+    String source = "src\\data\\earthQuakeDataWeekDec6sample2.atom";
     //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
 
 
@@ -24,10 +25,12 @@ public class DifferentSorters {
         EarthQuakeParser parser = new EarthQuakeParser();
         ArrayList<QuakeEntry> list  = parser.read(source);
         Collections.sort(list);
+        //Collections.sort(list, new MagnitudeComparator());
+
         for(QuakeEntry qe: list) {
             System.out.println(qe);
         }
-        int quakeNumber = 10;
+        int quakeNumber = 600;
         System.out.println("Print quake entry in position " + quakeNumber);
         System.out.println(list.get(quakeNumber));
 
@@ -67,7 +70,7 @@ public class DifferentSorters {
         for(QuakeEntry qe: list) {
             System.out.println(qe);
         }
-        int quakeNumber = 10;
+        int quakeNumber = 500;
         System.out.println("Print quake entry in position " + quakeNumber);
         System.out.println(list.get(quakeNumber));
 
@@ -80,7 +83,7 @@ public class DifferentSorters {
         for(QuakeEntry qe: list) {
             System.out.println(qe);
         }
-        int quakeNumber = 10;
+        int quakeNumber = 500;
         System.out.println("Print quake entry in position " + quakeNumber);
         System.out.println(list.get(quakeNumber));
 
@@ -93,15 +96,11 @@ public class DifferentSorters {
         DifferentSorters ds = new DifferentSorters();
         //ds.sortWithCompareTo();
         //ds.sortByTitleAndDepth();
-        //ds.sortByLastWordInTitleThenByMagnitude();
+        ds.sortByLastWordInTitleThenByMagnitude();
         //EarthQuakeClient2 client = new EarthQuakeClient2();
         //client.quakesWithFilter();
         //client.testMatchAllFilter();
         //client.testMatchAllFilter2();
-
-        String myString = "Io sono Davide!!";
-        String [] myArray = myString.split("\\W");
-        System.out.println(myArray[myArray.length - 1]);
     }
 
 }

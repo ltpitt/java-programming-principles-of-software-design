@@ -11,7 +11,7 @@ import edu.duke.*;
 
 public class QuakeSortInPlace {
 
-    String source = "src\\data\\earthQuakeDataDec6sample1.atom";
+    String source = "src\\data\\earthQuakeDataWeekDec6sample1.atom";
     //String source = "src\\data\\nov20quakedatasmall.atom";
     //String source = "src\\data\\nov20quakedata.atom";
     //String source = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_week.atom";
@@ -178,7 +178,7 @@ public class QuakeSortInPlace {
         //quakeSortInPlace.onePassBubbleSort(list, 0);
         //quakeSortInPlace.sortByMagnitudeWithBubbleSort(list);
         //quakeSortInPlace.sortByMagnitudeWithBubbleSortWithCheck(list);
-        //quakeSortInPlace.sortByMagnitudeWithCheck(list);
+        quakeSortInPlace.sortByMagnitudeWithCheck(list);
         //quakeSortInPlace.sortByLargestDepth(list);
         for (QuakeEntry qe : list) {
             System.out.println(qe);
