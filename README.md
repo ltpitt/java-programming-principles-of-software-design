@@ -3,7 +3,7 @@
 
 ## Prerequisites
 
-- Download and install Intellij IDEA (hhttps://www.jetbrains.com/idea/download)
+- Download and install [Intellij IDEA](https://www.jetbrains.com/idea/download)  
 
 ## How to use
 
