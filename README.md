@@ -24,7 +24,7 @@ Davide Nastri – [@pitto](https://twitter.com/pitto) – d.nastri@gmail.com
 
 Distributed under the MIT license. See ``LICENSE`` for more information.
 
-[https://github.com/ltpitt/java-programming-principles-of-software-design](https://github.com/ltpitt/)
+[Java Programming - Principles of Software Design](https://github.com/ltpitt/java-programming-principles-of-software-design)
 
 ## Contributing
 
